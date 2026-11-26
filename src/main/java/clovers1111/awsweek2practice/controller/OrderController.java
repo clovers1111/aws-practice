@@ -1,16 +1,25 @@
 package clovers1111.awsweek2practice.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import clovers1111.awsweek2practice.domain.S3OrderConfirmedResponse;
+import clovers1111.awsweek2practice.domain.OrderCreationRequest;
+import clovers1111.awsweek2practice.order.OrderCreationService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 class OrderController {
 
-    @PostMapping(path = "/create")
-    public OrderConfirmedResponse createOrder() {
+    private final OrderCreationService orderCreationService;
 
+    public OrderController(OrderCreationService orderCreationService) {
+
+        this.orderCreationService = orderCreationService;
+    }
+
+    // Create an order by just hitting this endpoint; get back an s3 bucket link to upload data
+    @PostMapping(path = "/create")
+    public S3OrderConfirmedResponse createOrder(@RequestBody OrderCreationRequest orderCreationRequest, @RequestParam boolean s3PresignedUrl) {
+        return orderCreationService.createOrderWithPresigned(orderCreationRequest);
     }
 
 }

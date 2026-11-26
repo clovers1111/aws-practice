@@ -1,10 +1,14 @@
 package clovers1111.awsweek2practice.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
+@Builder
+@AllArgsConstructor
 public class Order {
 
     @Id
@@ -20,6 +24,9 @@ public class Order {
     @Column
     private String description;
 
+    public Order() {
+
+    }
 
 
     public void setId(Long id) {

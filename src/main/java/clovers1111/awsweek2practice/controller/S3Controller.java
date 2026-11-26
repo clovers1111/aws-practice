@@ -1,13 +1,13 @@
 package clovers1111.awsweek2practice.controller;
 
 import clovers1111.awsweek2practice.storage.S3StorageService;
-import clovers1111.awsweek2practice.storage.domain.PresignedExtractedPutResponse;
+import clovers1111.awsweek2practice.domain.PresignedExtractedPutResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
-import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
+
 
 import java.io.IOException;
 

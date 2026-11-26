@@ -1,19 +1,16 @@
 package clovers1111.awsweek2practice.storage;
 
 import clovers1111.awsweek2practice.config.S3BucketProperties;
-import clovers1111.awsweek2practice.storage.domain.PresignedExtractedPutResponse;
+import clovers1111.awsweek2practice.domain.PresignedExtractedPutResponse;
 import jakarta.annotation.Nullable;
 import org.hibernate.validator.constraints.time.DurationMax;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.awscore.presigner.PresignedRequest;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
-import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
 import java.io.*;
