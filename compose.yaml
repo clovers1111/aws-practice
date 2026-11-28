@@ -1,16 +1,16 @@
 services:
-  db:
+  postgres-db:
     image: postgres:latest
-    container_name: my-postgres
+    user: postgres
+    container_name: my_postgres_container
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: orders
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: always
+      - postgres_data:/var/lib/postgresql
 
 volumes:
-  pgdata:
+  postgres_data:

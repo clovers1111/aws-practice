@@ -2,19 +2,20 @@ package clovers1111.awsweek2practice.storage;
 
 import clovers1111.awsweek2practice.config.S3BucketProperties;
 import clovers1111.awsweek2practice.domain.PresignedExtractedPutResponse;
+import clovers1111.awsweek2practice.domain.S3UploadStatus;
 import jakarta.annotation.Nullable;
 import org.hibernate.validator.constraints.time.DurationMax;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectResponse;
+import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
 import java.io.*;
 import java.time.Duration;
+import java.util.Optional;
 
 @Service
 public class S3StorageService {
@@ -91,6 +92,20 @@ public class S3StorageService {
                 .key(key)
                 .build(), RequestBody.fromInputStream(inputStream, size));
 
+    }
+
+    // Should really be its own domain object
+    public Optional<HeadObjectResponse> getHeadObjectFromKey(String key) {
+        final HeadObjectRequest headObjectRequest = HeadObjectRequest.builder()
+                .bucket(s3Bucket.url())
+                .key(key)
+                .build();
+
+        try  {
+            return Optional.of(s3Client.headObject(headObjectRequest));
+        } catch (NoSuchKeyException e) {
+            return Optional.empty();
+        }
     }
 
 
